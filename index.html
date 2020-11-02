@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Langtons Ant</title>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <canvas id='mycanvas'></canvas>
+    <script>
+        var canvas = document.getElementById("mycanvas");
+        ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        /* Canvas width and height */
+        var cwidth = window.innerWidth;
+        var cheight = window.innerHeight;
+
+        /* Create empty 2d array */
+        var array = new Array(cwidth);
+        for (var i = 0; i < cwidth; i++) {
+            array[i] = new Array(cwidth);
+        };
+
+        /* Directional Variables */
+        var RIGHT = "right";
+        var LEFT = "left";
+        var UP = "up";
+        var DOWN = "down";
+
+        /* Metrics */
+        var rectDiameter = 5;
+        var x = cwidth / 2;
+        var y = cheight / 2;
+        var interval = 50; //milliseconds
+        var direction = UP;
+
+        setInterval(() => {
+            if (array[x][y] === 0) {
+                if (direction == UP) {
+                    direction = RIGHT;
+                } else if (direction == LEFT) {
+                    direction = UP;
+                } else if (direction == DOWN) {
+                    direction = LEFT;
+                } else {
+                    direction = DOWN;
+                }
+            } else {
+                if (direction == UP) {
+                    direction = LEFT;
+                } else if (direction == LEFT) {
+                    direction = DOWN;
+                } else if (direction == DOWN) {
+                    direction = RIGHT;
+                } else {
+                    direction = UP;
+                }
+            };
+
+
+            if (array[x][y] === 0) {
+                ctx.fillStyle = "#2f2f2f";
+                ctx.fillRect(x, y + rectDiameter, rectDiameter, rectDiameter);
+
+                array[x][y] = 1;
+            } else {
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(x, y + rectDiameter, rectDiameter, rectDiameter);
+
+                array[x][y] = 0;
+            };
+
+
+            if (direction == RIGHT) {
+                x += rectDiameter;
+            }
+            else if (direction == UP) {
+                y += rectDiameter;
+            }
+            else if (direction == LEFT) {
+                x -= rectDiameter;
+            }
+            else {
+                y -= rectDiameter;
+            };
+
+
+            /* To represent the ant - Colour the current rect red */
+            ctx.fillStyle = "#ff0000";
+            ctx.fillRect(x, y + rectDiameter, rectDiameter, rectDiameter);
+
+        }, interval)
+    </script>
+</body>
+
+</html>
