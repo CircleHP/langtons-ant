@@ -10,34 +10,34 @@
 <body>
     <canvas id='mycanvas'></canvas>
     <script>
-        var canvas = document.getElementById("mycanvas");
+        const canvas = document.getElementById("mycanvas");
         ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         /* Canvas width and height */
-        var cwidth = window.innerWidth;
-        var cheight = window.innerHeight;
+        const cwidth = window.innerWidth;
+        const cheight = window.innerHeight;
 
         /* Create empty 2d array */
-        var array = new Array(cwidth);
-        for (var i = 0; i < cwidth; i++) {
+        const array = new Array(cwidth);
+        for (let i = 0; i < cwidth; i++) {
             array[i] = new Array(cwidth);
         };
 
-        /* Directional Variables */
-        var RIGHT = "right";
-        var LEFT = "left";
-        var UP = "up";
-        var DOWN = "down";
+        /* Directional constiables */
+        const RIGHT = "right";
+        const LEFT = "left";
+        const UP = "up";
+        const DOWN = "down";
 
         /* Metrics */
-        var rectDiameter = 5;
-        var x = cwidth / 2;
-        var y = cheight / 2;
-        var interval = 50; //milliseconds
-        var direction = UP;
+        const rectDiameter = 5;
+        let x = cwidth / 2;
+        let y = cheight / 2;
+        const interval = 0; //milliseconds
+        let direction = UP;
 
         setInterval(() => {
             if (array[x][y] === 0) {
